@@ -1,0 +1,99 @@
+<!-- Top Navigation Include -->
+<div data-ng-include="'js/app/views/header.client.view.html'"></div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="text-left">
+                <a href="#/{{host}}/trafficsources">
+                    <button class="btn btn-success">
+                        <i class="fa fa-caret-left"></i> Back to Traffic Sources
+                    </button>
+                </a>
+                <br/>
+                <br/>
+            </div>
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <div class="panel-title">
+                        Edit Traffic Source
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <br/>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="trafficsrc-name-label">Name</span>
+                                <input type="text" class="form-control" data-ng-model="trafficsrc_name" aria-describedby="trafficsrc-name-label">
+                            </div>
+                            <br/>
+                            <div class="input-group">
+                                <span class="input-group-addon" id="trafficsrc-type-label">Type</span>
+                                <input type="text" class="form-control" data-ng-model="trafficsrc_type" aria-describedby="trafficsrc-type-label">
+                            </div>
+                            <br/>
+                            <div class="input-group">
+                                <span class="input-group-addon" id="trafficsrc-group-label">Group</span>
+                                <input type="text" class="form-control" data-ng-model="trafficsrc_group" aria-describedby="trafficsrc-group-label">
+                            </div>
+                            <br/>
+                            <div class="input-group">
+                                <span class="input-group-addon" id="trafficsrc-login-url-label">Traffic Network Login Url</span>
+                                <input type="text" class="form-control" data-ng-model="trafficsrc_login_url" aria-describedby="trafficsrc-login-url-label">
+                            </div>
+                            <br/>
+                            <div class="input-group">
+                                <span class="input-group-addon" id="trafficsrc-login-username-label">Traffic Network Username</span>
+                                <input type="text" class="form-control" data-ng-model="trafficsrc_login_username" aria-describedby="trafficsrc-login-username-label">
+                            </div>
+                            <br/>
+                            <div class="input-group">
+                                <span class="input-group-addon" id="trafficsrc-login-password-label">Traffic Network Password</span>
+                                <input type="text" class="form-control" data-ng-model="trafficsrc_login_password" aria-describedby="trafficsrc-login-password-label">
+                            </div>
+                            <br/>
+                            <div class="col-md-6 text-center">
+                                <span id="trafficsrc-iscpc-label">
+                                    Is CPC
+                                </span>
+                                <input data-ng-click="iscpc_toggle()" type="checkbox" class="form-control createtrafficsrc-chkbox">
+                                <br/>
+                            </div>
+                            <div class="col-md-6 text-center">
+                                <span id="trafficsrc-iscpm-label">
+                                    Is CPM
+                                </span>
+                                <input data-ng-click="iscpm_toggle()" type="checkbox" class="form-control createtrafficsrc-chkbox">
+                                <br/>
+                            </div>
+                            <br/>
+                            <div class="input-group">
+                                <span class="input-group-addon" id="trafficsrc-epa-label">Cost Per Action $</span>
+                                <input type="text" class="form-control" data-ng-model="trafficsrc_cpa" aria-describedby="trafficsrc-epa-label">
+                            </div>
+                            <br/>
+                            <div class="input-group">
+                                <span class="input-group-addon" id="trafficsrc-adtype-label">Ad Type</span>
+                                <input type="text" class="form-control" data-ng-model="trafficsrc_adtype" aria-describedby="trafficsrc-adtype-label">
+                            </div>
+                            <br/>
+                            <div class="input-group">
+                                <span class="input-group-addon" id="trafficsrc-adimg-label">Ad Image</span>
+                                <input type="text" class="form-control" data-ng-model="trafficsrc_adimg" aria-describedby="trafficsrc-adimg-label">
+                            </div>
+                        </div>
+                    </div>
+                    <br/>
+                    <hr/>
+                    <br/>
+                    <div class="text-center">
+                        <button class="btn btn-success" data-ng-click="update_trafficsrc()">
+                            Update Traffic Source
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

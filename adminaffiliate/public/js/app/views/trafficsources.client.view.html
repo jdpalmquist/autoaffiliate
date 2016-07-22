@@ -1,0 +1,206 @@
+<!-- Top Navigation Include -->
+<div data-ng-include="'js/app/views/header.client.view.html'"></div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <div class="panel-title">
+                                Traffic Sources
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <div>
+                                <!-- Nav tabs -->
+                                <ul class="nav nav-tabs" role="tablist">
+                                    <li role="presentation" class="active">
+                                        <a id="active_trafficsrc_tab" href="#active_trafficsrc" aria-controls="active_offers" role="tab" data-toggle="tab">
+                                            Active Traffic Sources
+                                        </a>
+                                    </li>
+                                    <li role="presentation">
+                                        <a id="paused_trafficsrc_tab" href="#paused_trafficsrc" aria-controls="paused_offers" role="tab" data-toggle="tab">
+                                            Paused Traffic Sources
+                                        </a>
+                                    </li>
+                                    <li role="presentation">
+                                        <a id="create_trafficsrc_tab" class="clickable" role="tab" data-toggle="modal" data-target="#createTrafficsrcModal">
+                                            Create Traffic Source
+                                        </a>
+                                    </li>
+                                </ul>
+
+                                <!-- Tab panes -->
+                                <div class="tab-content">
+                                    <div role="tabpanel" class="tab-pane active" id="active_trafficsrc">
+                                        <br/>
+                                        <!-- Data Table -->
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>Broker URL</th>
+                                                    <th>Type</th>
+                                                    <th>Is CPC</th>
+                                                    <th>Is CPM</th>
+                                                    <th>CPA</th>
+                                                    <th>Inbound Clicks</th>
+                                                    <th><!-- buttons --></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr data-ng-repeat="t in active_trafficsrcs">
+                                                    <td>{{t.login_url}}</td>
+                                                    <td>{{t.type}}</td>
+                                                    <td>{{t.is_cpc}}</td>
+                                                    <td>{{t.is_cpm}}</td>
+                                                    <td>{{t.cpa | currency:'$'}}</td>
+                                                    <td>{{t.inbound_clicks}}</td>
+                                                    <td>
+                                                        <a href="#/{{host}}/trafficsources/edit/{{t._id}}">
+                                                            <button class="btn btn-primary">
+                                                                View/Edit 
+                                                            </button>
+                                                        </a>
+                                                        &nbsp;
+                                                        &nbsp;
+                                                        <button class="btn btn-danger" data-trafficsrc-id="{{t._id}}" data-ng-click="delete_traffic_source($event)">
+                                                            <i class="fa fa-trash"></i>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div role="tabpanel" class="tab-pane" id="paused_trafficsrc">
+                                        <br/>
+                                        <!-- Data Table -->
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>Broker URL</th>
+                                                    <th>Type</th>
+                                                    <th>Is CPC</th>
+                                                    <th>Is CPM</th>
+                                                    <th>CPA</th>
+                                                    <th>Inbound Clicks</th>
+                                                    <th><!-- buttons --></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr data-ng-repeat="t in paused_trafficsrcs">
+                                                    <td>{{t.login_url}}</td>
+                                                    <td>{{t.type}}</td>
+                                                    <td>{{t.is_cpc}}</td>
+                                                    <td>{{t.is_cpm}}</td>
+                                                    <td>{{t.cpa | currency:'$'}}</td>
+                                                    <td>{{t.inbound_clicks}}</td>
+                                                    <td>
+                                                        <button class="btn btn-primary">
+                                                            View/Edit 
+                                                        </button>
+                                                        &nbsp;
+                                                        &nbsp;
+                                                        <button class="btn btn-danger">
+                                                            <i class="fa fa-trash"></i>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br/>
+                    <br/>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add Traffic Sources Modal -->
+<div class="modal fade" id="createTrafficsrcModal" tabindex="-1" role="dialog" aria-labelledby="createTrafficsrcModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="createTrafficsrcModalLabel">Create Traffic Source</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="input-group">
+                            <span class="input-group-addon" id="trafficsrc-name-label">Name</span>
+                            <input type="text" class="form-control" data-ng-model="trafficsrc_name" aria-describedby="trafficsrc-name-label">
+                        </div>
+                        <br/>
+                        <div class="input-group">
+                            <span class="input-group-addon" id="trafficsrc-type-label">Type</span>
+                            <input type="text" class="form-control" data-ng-model="trafficsrc_type" aria-describedby="trafficsrc-type-label">
+                        </div>
+                        <br/>
+                        <div class="input-group">
+                            <span class="input-group-addon" id="trafficsrc-group-label">Group</span>
+                            <input type="text" class="form-control" data-ng-model="trafficsrc_group" aria-describedby="trafficsrc-group-label">
+                        </div>
+                        <br/>
+                        <div class="input-group">
+                            <span class="input-group-addon" id="trafficsrc-login-url-label">Traffic Network Login Url</span>
+                            <input type="text" class="form-control" data-ng-model="trafficsrc_login_url" aria-describedby="trafficsrc-login-url-label">
+                        </div>
+                        <br/>
+                        <div class="input-group">
+                            <span class="input-group-addon" id="trafficsrc-login-username-label">Traffic Network Username</span>
+                            <input type="text" class="form-control" data-ng-model="trafficsrc_login_username" aria-describedby="trafficsrc-login-username-label">
+                        </div>
+                        <br/>
+                        <div class="input-group">
+                            <span class="input-group-addon" id="trafficsrc-login-password-label">Traffic Network Password</span>
+                            <input type="text" class="form-control" data-ng-model="trafficsrc_login_password" aria-describedby="trafficsrc-login-password-label">
+                        </div>
+                        <br/>
+                        <div class="col-md-6 text-center">
+                            <span id="trafficsrc-iscpc-label">
+                                Is CPC
+                            </span>
+                            <input data-ng-click="iscpc_toggle()" type="checkbox" class="form-control createtrafficsrc-chkbox">
+                            <br/>
+                        </div>
+                        <div class="col-md-6 text-center">
+                            <span id="trafficsrc-iscpm-label">
+                                Is CPM
+                            </span>
+                            <input data-ng-click="iscpm_toggle()" type="checkbox" class="form-control createtrafficsrc-chkbox">
+                            <br/>
+                        </div>
+                        <br/>
+                        <div class="input-group">
+                            <span class="input-group-addon" id="trafficsrc-epa-label">Cost Per Action $</span>
+                            <input type="text" class="form-control" data-ng-model="trafficsrc_cpa" aria-describedby="trafficsrc-epa-label">
+                        </div>
+                        <br/>
+                        <div class="input-group">
+                            <span class="input-group-addon" id="trafficsrc-adtype-label">Ad Type</span>
+                            <input type="text" class="form-control" data-ng-model="trafficsrc_adtype" aria-describedby="trafficsrc-adtype-label">
+                        </div>
+                        <br/>
+                        <div class="input-group">
+                            <span class="input-group-addon" id="trafficsrc-adimg-label">Ad Image</span>
+                            <input type="text" class="form-control" data-ng-model="trafficsrc_adimg" aria-describedby="trafficsrc-adimg-label">
+                        </div>
+                        <br/>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-ng-click="create_trafficsrc()">Create Traffic Source</button>
+            </div>
+        </div>
+    </div>
+</div>

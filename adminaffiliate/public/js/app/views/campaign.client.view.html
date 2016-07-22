@@ -1,0 +1,469 @@
+<!-- Top Navigation Include -->
+<div data-ng-include="'js/app/views/header.client.view.html'"></div>
+
+<div class="container">
+    <div class="row">        
+        <div class="col-md-12">
+            <!-- name and date -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="alert alert-info" role="alert">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <b class="capitalize font-size-20px">Campaign:&nbsp;&nbsp;&nbsp;<i>{{name}}</i></b>
+                            </div>
+                            <div class="col-md-4 text-center">
+                                <!--
+                                <b class="lowercase font-size-20px">{{createdAt}}</b>
+                                -->
+                            </div>
+                            <div class="col-md-4 text-right">
+                                <button class="btn btn-sm btn-success" ng-show="!active">
+                                    <i class="fa fa-play"></i> Start Campaign
+                                </button>
+                                <button class="btn btn-sm btn-primary" ng-show="active">
+                                    <i class="fa fa-pause"></i> Pause Campaign
+                                </button>
+                                &nbsp;
+                                &nbsp;
+                                <a href="{{edit_campaign_url}}">
+                                    <button class="btn btn-sm btn-primary">
+                                        <i class="fa fa-pencil"></i> Edit Campaign
+                                    </button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--exp, inc and net -->
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Total Expenses</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="stats_num_large text-center">
+                                {{total_expenses | currency:"$":2}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Gross Revenue</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="stats_num_large text-center">
+                                {{gross_revenue | currency:"$":2}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Net Profit</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="stats_num_large text-center">
+                                {{net_profit | currency:"$":2}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- pv, lg, & cv -->
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Total Page Views</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="stats_num_large text-center">
+                                {{total_pv}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Total Leads Generated</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="stats_num_large text-center">
+                                {{total_lg}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Total Sales</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="stats_num_large text-center">
+                                {{total_cv}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- tabs: offers, landers, traffic sources, etc. -->
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation">
+                            <a id="campaign-tab-link" class="clickable" aria-controls="settings" role="tab" data-toggle="tab" data-target="#campaigntab">Campaign Info</a>
+                        </li>
+                        <li role="presentation">
+                            <a id="offer-tab-link" class="clickable" aria-controls="home" role="tab" data-toggle="tab" data-target="#offertab">Offer</a>
+                        </li>
+                        <li role="presentation">
+                            <a id="lander-tab-link" class="clickable" aria-controls="profile" role="tab" data-toggle="tab" data-target="#landerstab">Landers</a>
+                        </li>
+                        <li role="presentation">
+                            <a id="trafficsrc-tab-link" class="clickable" aria-controls="messages" role="tab" data-toggle="tab" data-target="#trafficsrctab">Traffic Sources</a>
+                        </li>
+                    </ul><!-- end nav tabs -->
+
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        <!-- campaign meta data -->
+                        <div role="tabpanel" class="tab-pane" id="campaigntab">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <br/>
+                                    <br/>
+                                    <div class="panel panel-primary">
+                                        <div class="panel-heading">
+                                            <h3 class="panel-title">
+                                                <b><i class="capitalize">{{name}}</i></b> created <b>{{createdAt}}</b>
+                                            </h3>
+                                        </div>
+                                        <div class="panel-body campaign-panel">
+                                             <!-- ACTIVE AND URL-SLUG -->
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon" id="c-status-active">
+                                                            Active
+                                                        </span>
+                                                        <input type="text" class="form-control" id="basic-url" aria-describedby="c-status-active" value="Yes" ng-show="active" disabled />
+                                                        <input type="text" class="form-control" id="basic-url" aria-describedby="c-status-active" value="No" ng-show="!active" disabled />
+                                                    </div>
+                                                    <br/>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon" id="c-status-slug">
+                                                            Url Slug
+                                                        </span>
+                                                        <input type="text" class="form-control" id="basic-url" aria-describedby="c-status-slug" value="{{slug}}" disabled />
+                                                    </div>
+                                                    <br/>
+                                                </div>
+                                            </div>
+
+                                            <!-- GROUP AND TYPE -->
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon" id="c-status-group">
+                                                            Group
+                                                        </span>
+                                                        <input type="text" class="form-control" id="basic-url" aria-describedby="c-status-group" value="{{group}}" disabled />
+                                                    </div>
+                                                    <br/>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon" id="c-status-type">
+                                                            Type
+                                                        </span>
+                                                        <input type="text" class="form-control" id="basic-url" aria-describedby="c-status-type" value="{{type}}" disabled />
+                                                    </div>
+                                                    <br/>
+                                                </div>                                
+                                            </div>
+
+                                            <!-- ISMOBILE AND ISDESKTOP -->
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon" id="c-status-ismobile">
+                                                            Is Mobile
+                                                        </span>
+                                                        <input type="text" class="form-control" id="basic-url" aria-describedby="c-status-ismobile" value="Yes" ng-show="is_mobile" disabled />
+                                                        <input type="text" class="form-control" id="basic-url" aria-describedby="c-status-ismobile" value="No" ng-show="!is_mobile" disabled />
+                                                    </div>
+                                                    <br/>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon" id="c-status-isdesktop">
+                                                            Is Desktop
+                                                        </span>
+                                                        <input type="text" class="form-control" id="basic-url" aria-describedby="c-status-isdesktop" value="Yes" ng-show="is_desktop" disabled />
+                                                        <input type="text" class="form-control" id="basic-url" aria-describedby="c-status-isdesktop" value="No" ng-show="!is_desktop" disabled />
+                                                    </div>
+                                                    <br/>
+                                                </div>                                
+                                            </div>
+
+                                            <!--  -->
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon" id="c-status-phase">
+                                                            Phase
+                                                        </span>
+                                                        <input type="text" class="form-control" id="basic-url" aria-describedby="c-status-phase" value="{{phase}}" disabled />
+                                                    </div>
+                                                    <br/>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon" id="c-status-phase-interval">
+                                                            Phase Interval
+                                                        </span>
+                                                        <input type="text" class="form-control" id="basic-url" aria-describedby="c-status-phase-interval" value="{{phase_interval}}" disabled />
+                                                    </div>
+                                                    <br/>
+                                                </div>                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- offers -->
+                        <div role="tabpanel" class="tab-pane" id="offertab">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <br/>
+                                    <br/>
+                                    <div class="panel panel-primary">
+                                        <div class="panel-heading">
+                                            <h3 class="panel-title">Offer</h3>
+                                        </div>
+                                        <div class="panel-body campaign-panel">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon" id="offer-name-label">
+                                                            Offer Name
+                                                        </span>
+                                                        <input type="text" class="form-control" aria-describedby="offer-name-label" value="{{offer_name}}" disabled />
+                                                    </div>
+                                                    <br/>
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon" id="offer-type-label">
+                                                            Offer Type
+                                                        </span>
+                                                        <input type="text" class="form-control" aria-describedby="offer-type-label" value="{{offer_type}}" disabled />
+                                                    </div>
+                                                    <br/>
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon" id="offer-ismobile-label">
+                                                            Offer Is Mobile
+                                                        </span>
+                                                        <input type="text" class="form-control" aria-describedby="offer-ismobile-label" value="{{offer_ismobile}}" disabled />
+                                                    </div>
+                                                    <br/>
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon" id="offer-epa-label">
+                                                            Offer Epa
+                                                        </span>
+                                                        <input type="text" class="form-control" aria-describedby="offer-epa-label" value="{{offer_epa}}" disabled />
+                                                    </div>
+                                                    <br/>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon" id="offer-redirect-url-label">
+                                                            Offer Redirect URL
+                                                        </span>
+                                                        <input type="text" class="form-control" aria-describedby="offer-redirect-url-label" value="{{offer_redirect_url}}" disabled />
+                                                    </div>
+                                                    <br/>
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon" id="offer-group-label">
+                                                            Offer Group
+                                                        </span>
+                                                        <input type="text" class="form-control" aria-describedby="offer-group-label" value="{{offer_group}}" disabled />
+                                                    </div>
+                                                    <br/>
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon" id="offer-isdesktop-label">
+                                                            Offer Is Desktop
+                                                        </span>
+                                                        <input type="text" class="form-control" aria-describedby="offer-isdesktop-label" value="{{offer_isdesktop}}" disabled />
+                                                    </div>
+                                                    <br/>
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon" id="offer-conversions-label">
+                                                            Offer Conversions
+                                                        </span>
+                                                        <input type="text" class="form-control" aria-describedby="offer-conversions-label" value="{{offer_conversions}}" disabled />
+                                                    </div>
+                                                    <br/>
+                                                </div><!-- end current offer -->
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- landers -->
+                        <div role="tabpanel" class="tab-pane" id="landerstab">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <hr/>
+                                    <div class="panel panel-primary">
+                                        <div class="panel-heading">
+                                            <h3 class="panel-title">Active Landers</h3>
+                                        </div>
+                                        <div class="panel-body campaign-panel scroll-y">
+                                            <table class="table table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th>
+                                                            <b>Name</b>
+                                                        </th>
+                                                        <th>
+                                                            <b>Group</b>
+                                                        </th>
+                                                        <th>
+                                                            <b>Type</b>
+                                                        </th>
+                                                        <th>
+                                                            <b>Page URL</b>
+                                                        </th>
+                                                        <th>
+                                                            <b>Is Mobile?</b>
+                                                        </th>
+                                                        <th>
+                                                            <b>Is Desktop</b>
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr ng-repeat="l in active_landers">       
+                                                        <td>
+                                                            {{l.name}}
+                                                        </td>
+                                                        <td>
+                                                            {{l.group}}
+                                                        </td>
+                                                        <td>
+                                                            {{l.type}}
+                                                        </td>
+                                                        <td>
+                                                            {{l.url}}
+                                                        </td>
+                                                        <td>
+                                                            {{l.is_mobile}}
+                                                        </td>
+                                                        <td>
+                                                            {{l.is_desktop}}
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- traffic source -->
+                        <div role="tabpanel" class="tab-pane" id="trafficsrctab">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <br/>
+                                    <br/>
+                                    <div class="panel panel-primary">
+                                        <div class="panel-heading">
+                                            <h3 class="panel-title">Traffic Sources</h3>
+                                        </div>
+                                        <div class="panel-body campaign-panel scroll-y">
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- end tab panes -->
+                </div>
+            </div><!-- end tabs: offers, landers,traffic sources, etc. -->
+
+            <!-- Footer: name and date -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="alert alert-info" role="alert">
+                        <div class="row">
+                            <div class="col-md-4 text-center">
+                                <b class="capitalize font-size-20px">Campaign:&nbsp;&nbsp;&nbsp;<i>{{name}}</i></b>
+                            </div>
+                            <div class="col-md-4 text-center">
+                                <!--
+                                <b class="lowercase font-size-20px">{{createdAt}}</b>
+                                -->
+                            </div>
+                            <div class="col-md-4 text-center">
+                                <button class="btn btn-sm btn-success" ng-show="!active">
+                                    <i class="fa fa-play"></i> Start Campaign
+                                </button>
+                                <button class="btn btn-sm btn-primary" ng-show="active">
+                                    <i class="fa fa-pause"></i> Pause Campaign
+                                </button>
+                                &nbsp;
+                                &nbsp;
+                                <a href="{{edit_campaign_url}}">
+                                    <button class="btn btn-sm btn-primary">
+                                        <i class="fa fa-pencil"></i> Edit Campaign
+                                    </button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <br/>
+            <br/>
+        </div>
+    </div>
+</div>
+
+<!-- Add traffic source Modal -->
+<div class="modal fade" id="addTrafficsrcModal" tabindex="-1" role="dialog" aria-labelledby="addTrafficsrcModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="addLandersModalLabel">Add Traffic Source to Campaign</h4>
+            </div>
+            <div class="modal-body">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>

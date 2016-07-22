@@ -1,0 +1,221 @@
+<!-- Top Navigation Include -->
+<div data-ng-include="'js/app/views/header.client.view.html'"></div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Add a Server to your Network</h3>
+                </div>
+                <div class="panel-body">
+                    <!-- Meta Info -->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <br/>
+                            <b>Server Meta Data</b>
+                            <br/>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="name-label">
+                                    Name [required]
+                                </span>
+                                <input type="text" class="form-control" ng-model="name" aria-describedby="name-label">
+                            </div>
+                            <br/>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="group-label">
+                                    Group [optional]
+                                </span>
+                                <input type="text" class="form-control" ng-model="group" aria-describedby="group-label">
+                            </div>
+                            <br/>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="type-label">
+                                    Type [optional]
+                                </span>
+                                <input type="text" class="form-control" ng-model="type" aria-describedby="type-label">
+                            </div>
+                            <br/>
+                        </div>
+                    </div>
+
+                    <!-- Domain Registry Info -->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <br/>
+                            <b>Domain Name Registration</b>
+                            <br/>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="full-domain-name-label">
+                                    Domain Name [optional]
+                                </span>
+                                <input type="text" class="form-control" ng-model="fulldomainname" aria-describedby="full-domain-name-label">
+                            </div>
+                            <br/>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="registrar-url-label">
+                                    Registrar Url [optional]
+                                </span>
+                                <input type="text" class="form-control" ng-model="registrarurl" aria-describedby="registrar-url-label">
+                            </div>
+                            <br/>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="registrar-user-label">
+                                    Registrar User [optional]
+                                </span>
+                                <input type="text" class="form-control" ng-model="registraruser" aria-describedby="registrar-user-label">
+                            </div>
+                            <br/>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="registrar-pass-label">
+                                    Registrar Pass [optional]
+                                </span>
+                                <input type="text" class="form-control" ng-model="registrarpass" aria-describedby="registrar-pass-label">
+                            </div>
+                            <br/>
+                        </div>
+                    </div>
+                    
+                    <!-- Hosting provider info -->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <br/>
+                            <b>Hosting Service</b>
+                            <br/>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="hosting-url-label">
+                                    Hosting Service Website URL [optional]
+                                </span>
+                                <input type="text" class="form-control" ng-model="hostingurl" aria-describedby="hosting-url-label">
+                            </div>
+                            <br/>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="hosting-user-label">
+                                    Hosting Username [optional]
+                                </span>
+                                <input type="text" class="form-control" ng-model="hostinguser" aria-describedby="hosting-user-label">
+                            </div>
+                            <br/>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="hosting-pass-label">
+                                    Hosting Password [optional]
+                                </span>
+                                <input type="text" class="form-control" ng-model="hostingpass" aria-describedby="hosting-pass-label">
+                            </div>
+                            <br/>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="hosting-ip-label">
+                                    Hosting Ip [required]
+                                </span>
+                                <input type="text" class="form-control" ng-model="hostingip" aria-describedby="hosting-ip-label">
+                            </div>
+                            <br/>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="hosting-port-label">
+                                    Hosting Port [optional]
+                                </span>
+                                <input type="text" class="form-control" ng-model="hostingport" aria-describedby="hosting-port-label">
+                            </div>
+                            <br/>
+                        </div>
+                    </div>
+
+                    <!-- MongoDB Instance Info -->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <br/>
+                            <b>Database Info</b>
+                            <br/>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="mongodb-connstr-label">
+                                    MongoDB Conn Str [optional]
+                                </span>
+                                <input type="text" class="form-control" ng-model="mongodbconnstr" aria-describedby="mongodb-connstr-label">
+                            </div>
+                            <br/>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="mongodb-user-label">
+                                    MongoDB User [optional]
+                                </span>
+                                <input type="text" class="form-control" ng-model="mongodbuser" aria-describedby="mongodb-user-label">
+                            </div>
+                            <br/>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="mongodb-pass-label">
+                                    MongoDB Pass [optional]
+                                </span>
+                                <input type="text" class="form-control" ng-model="mongodbpass" aria-describedby="mongodb-pass-label">
+                            </div>
+                            <br/>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="mongodb-host-label">
+                                    MongoDB IP [required]
+                                </span>
+                                <input type="text" class="form-control" ng-model="mongodbhost" aria-describedby="mongodb-host-label">
+                            </div>
+                            <br/>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="mongodb-port-label">
+                                    MongoDB Port [optional]
+                                </span>
+                                <input type="text" class="form-control" ng-model="mongodbport" aria-describedby="mongodb-port-label">
+                            </div>
+                            <br/>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="mongodb-dbname-label">
+                                    MongoDB DB Name [required]
+                                </span>
+                                <input type="text" class="form-control" ng-model="mongodbdbname" aria-describedby="mongodb-dbname-label">
+                            </div>
+                            <br/>
+                        </div>
+                    </div>
+                    <!-- Submit Button -->
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <div class="btn btn-lg btn-primary" ng-click="add()">
+                                Submit
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

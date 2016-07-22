@@ -1,0 +1,32 @@
+{
+  "name": "AutoAffiliate",
+  "version": "2.0.0",
+  "description": "Intelligent Affiliate Marketing Software",
+  "main": "server.js",
+  "dependencies": {
+    "express": "*.*",
+    "express-session": "*.*",
+    "express-useragent": "*.*",
+    "mongoose": "*.*",
+    "moment": "*.*",
+    "body-parser": "*.*",
+    "cookie-parser": "*.*",
+    "bcrypt-nodejs": "*.*",
+    "nodemailer": "*.*",
+    "cron": "*.*",
+    "step": "*.*",
+    "lactate": "*.*",
+    "crypto": "*.*",
+    "socket.io": "*.*",
+    "chokidar": "*.*",
+    "nodemon": "*.*"
+  },
+  "scripts": {
+    "pretest": "",
+    "test": "nodemon server.js -w /custom_modules -w /package.json -w /server.js -e html,json,css,js",
+    "start": "nodemon server.js -w /custom_modules -w /package.json -w /server.js -e html,json,css,js"
+  },
+  "author": "",
+  "repository": "",
+  "license": "ISC"
+}

@@ -1,0 +1,44 @@
+/*
+	app CSS 
+*/
+
+body {
+	background-color: #0B1B2B !important;	
+	padding-top:71px;
+}
+
+.stats_num_large{
+    font-size: 4em;
+}
+
+.campaign-panel{
+    min-height:246px;
+    max-height:246px;
+}
+
+
+.createlander-chkbox,
+.createoffer-chkbox,
+.createtrafficsrc-chkbox{
+    display:block !important;
+    width:35px !important;
+    max-width:35px !important;
+    margin:0 auto !important;
+}
+
+#campaign-add-landers-msg-container{
+    position:fixed;
+    bottom:40px;
+    right: 40px;
+    width: 200px;
+    height: 200px;
+    min-height: 200px;
+    border-radius: 50%;
+    background-color: #337ab7;;
+}
+#campaign-add-landers-msg{
+    color: #fff;
+    font-size: 1.8em;
+    padding-top:70px;
+    text-align:center;
+}

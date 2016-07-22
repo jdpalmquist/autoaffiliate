@@ -1,0 +1,292 @@
+<!-- Top Navigation Include -->
+<div data-ng-include="'js/app/views/header.client.view.html'"></div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Available Servers</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-9">
+                            <b>Notes:</b>
+                            <div class="">
+                                <ul>
+                                    <li>
+                                        IMPORTANT: If you are using OpenVPN to connect to remote databases, you must exit this app, and first run the ./start_ovpn.sh script using root privileges, then reboot this app.  Otherwise the database connection to the remote autoaffiliate nodes will not work!
+                                    </li>
+                                    <li>
+                                        The adminaffiliate app does <b><i>not</i></b> change the system settings on the remote server instance, the only settings it can change are for the autoaffiliate application. The available settings are so the admin unit can interact with the server nodes remotely! If the credentials change for domain, or hosting, or database login, they will need to be manually updated here to ensure the Admin Affiliate continues to work.
+                                    </li>
+                                    <li>
+                                        These servers represent server instances where the Auto Affiliate ad-servers are deployed to production.
+                                    </li>
+                                    <li>
+                                        Click the server name to access campaign, offers, landers, traffic, stats of that specific server instance.
+                                    </li>
+                                    <li>
+                                        Click on the "Edit" button to edit the individual meta data of each server record.
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="text-center">
+                                <br/>
+                                <br/>
+                                <a href="#/addserver">
+                                    <button class="btn btn-success">
+                                        Add a Server
+                                    </button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>                    
+                    <hr/>
+                    <br/>
+                    <!-- Data Table -->
+                    <table id="server-table" class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Group</th>
+                                <th>Domain</th>
+                                <th>IP Address</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr data-ng-repeat="s in servers">
+                                <td>
+                                    <h4>
+                                        <a href="#/{{s.name}}/campaigns" title="view campaign info">
+                                        {{s.name}}
+                                        </a>
+                                    </h4>
+                                </td>
+                                <td>
+                                    <div style="padding-top:10px;">
+                                        {{s.type}}
+                                    </div>
+                                </td>
+                                <td>
+                                    <div style="padding-top:10px;">
+                                        {{s.group}}
+                                    </div>
+                                </td>
+                                <td>
+                                    <div style="padding-top:10px;">
+                                        {{s.domain}}
+                                    </div>
+                                </td>
+                                <td>
+                                    <div style="padding-top:10px;">
+                                        {{s.ip}}
+                                    </div>
+                                </td>
+                                <td>
+                                    <button class="btn btn-primary" data-server-id="{{s._id}}" data-toggle="modal" data-target="#editServerModal" data-ng-click="edit_server($event)">
+                                        Edit
+                                    </button>
+                                    &nbsp;
+                                    &nbsp;
+                                    <button class="btn btn-danger" data-server-id="{{s._id}}" data-ng-click="delete_server($event)">
+                                        <i class="fa fa-trash" data-server-id="{{s._id}}"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Group</th>
+                                <th>Domain</th>
+                                <th>IP Address</th>
+                                <th></th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                    <div id="no-servers-message" class="display-none">
+                        <div class="text-center">
+                            <span>No servers found!</span>
+                        </div>
+                        <br/>
+                        <hr/>
+                        <div class="text-center">
+                            <a href="#/addserver">
+                                <button class="btn btn-success">Add a Server</button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- editServerModal -->
+<div class="modal fade" id="editServerModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Edit Server Configuration</h4>
+        </div>
+        <div class="modal-body">
+            <div class="width80 center">
+                <input type="hidden" data-ng-model="server_id" />
+
+                <h3>Server</h3>
+                <hr/>
+                <!-- server name -->
+                <div class="input-group">
+                    <span class="input-group-addon" id="server-name-label">Name</span>
+                    <input type="text" class="form-control" id="server-name" aria-describedby="server-name-label" data-ng-model="server_name" />
+                </div>
+                <br/>
+            
+                <!-- server type -->
+                <div class="input-group">
+                    <span class="input-group-addon" id="server-type-label">Type</span>
+                    <input type="text" class="form-control" id="server-type" aria-describedby="server-type-label" data-ng-model="server_type" />
+                </div>
+                <br/>
+
+                <!-- server group -->
+                <div class="input-group">
+                    <span class="input-group-addon" id="server-group-label">Group</span>
+                    <input type="text" class="form-control" id="server-group" aria-describedby="server-group-label" data-ng-model="server_group" />
+                </div>
+                <br/>
+
+                <h3>Mongo DB Configuration</h3>
+                <hr/>
+
+                <!-- mongo db connection string -->
+                <div class="input-group">
+                    <span class="input-group-addon" id="server-mongodb-connection-string-label">MongoDB Connection String</span>
+                    <input type="text" class="form-control" id="server-mongodb-connection-string" aria-describedby="server-mongodb-connection-string-label" data-ng-model="server_mongodb_connection_string" />
+                </div>
+                <br/>
+
+                <h5>or</h5>
+                <br/>
+
+                <!-- mongo db username -->
+                <div class="input-group">
+                    <span class="input-group-addon" id="server-mongodb-username-label">MongoDB Username</span>
+                    <input type="text" class="form-control" id="server-mongodb-username" aria-describedby="server-mongodb-username-label" data-ng-model="server_mongodb_username" />
+                </div>
+                <br/>
+
+                <!-- mongo db password -->
+                <div class="input-group">
+                    <span class="input-group-addon" id="server-mongodb-password-label">MongoDB Password</span>
+                    <input type="text" class="form-control" id="server-mongodb-password" aria-describedby="server-mongodb-password-label" data-ng-model="server_mongodb_password" />
+                </div>
+                <br/>
+
+                <!-- mongo db ip address -->
+                <div class="input-group">
+                    <span class="input-group-addon" id="server-mongodb-host-label">MongoDB URL/IP</span>
+                    <input type="text" class="form-control" id="server-mongodb-host" aria-describedby="server-mongodb-host-label" data-ng-model="server_mongodb_host" />
+                </div>
+                <br/>
+
+                <!-- mongo db port -->
+                <div class="input-group">
+                    <span class="input-group-addon" id="server-mongodb-port-label">MongoDB Port</span>
+                    <input type="text" class="form-control" id="server-mongodb-port" aria-describedby="server-mongodb-port-label" data-ng-model="server_mongodb_port" />
+                </div>
+                <br/>
+
+                <!-- mongo db dbname -->
+                <div class="input-group">
+                    <span class="input-group-addon" id="server-mongodb-database-label">MongoDB Database Name</span>
+                    <input type="text" class="form-control" id="server-mongodb-database" aria-describedby="server-mongodb-database-label" data-ng-model="server_mongodb_database" />
+                </div>
+                <br/>
+            
+                
+                <h3>Hosting Service</h3>
+                <hr/>
+
+                <!-- hosting service website url -->
+                <div class="input-group">
+                    <span class="input-group-addon" id="server-hosting-service-url-label">Hosting Service Website</span>
+                    <input type="text" class="form-control" id="server-hosting-service-url" aria-describedby="server-hosting-service-url-label" data-ng-model="server_hosting_service_url" />
+                </div>
+                <br/>
+
+                <!-- hosting service login username -->
+                <div class="input-group">
+                    <span class="input-group-addon" id="server-hosting-service-username-label">Service Username</span>
+                    <input type="text" class="form-control" id="server-hosting-service-username" aria-describedby="server-hosting-service-username-label" data-ng-model="server_hosting_service_username" />
+                </div>
+                <br/>
+
+                <!-- hosting service login password -->
+                <div class="input-group">
+                    <span class="input-group-addon" id="server-hosting-service-password-label">Service Password</span>
+                    <input type="text" class="form-control" id="server-hosting-service-password" aria-describedby="server-hosting-service-password-label" data-ng-model="server_hosting_service_password" />
+                </div>
+                <br/>
+
+                <!-- hosting service server IP address -->
+                <div class="input-group">
+                    <span class="input-group-addon" id="server-hosting-service-ip-label">Service IP</span>
+                    <input type="text" class="form-control" id="server-hosting-service-ip" aria-describedby="server-hosting-service-ip-label" data-ng-model="server_hosting_service_ip" />
+                </div>
+                <br/>
+
+                <!-- hosting service server port number -->
+                <div class="input-group">
+                    <span class="input-group-addon" id="server-hosting-service-port-label">Service Port</span>
+                    <input type="text" class="form-control" id="server-hosting-service-port" aria-describedby="server-hosting-service-port-label" data-ng-model="server_hosting_service_port" />
+                </div>
+                <br/>
+
+                
+                <h3>Domain</h3>
+                <hr/>
+
+                <!-- domain name -->
+                <div class="input-group">
+                    <span class="input-group-addon" id="server-domain-name-label">Domain Name</span>
+                    <input type="text" class="form-control" id="server-domain-name" aria-describedby="server-domain-name-label " data-ng-model="server_domain_name"/>
+                </div>
+                <br/>
+            
+                <!-- domain registrar website URL -->
+                <div class="input-group">
+                    <span class="input-group-addon" id="server-domain-registrar-url-label">Registrar Website</span>
+                    <input type="text" class="form-control" id="server-domain-registrar-url" aria-describedby="server-domain-registrar-url-label" data-ng-model="server_domain_registrar_url" />
+                </div>
+                <br/>
+            
+                <!-- registrar login username -->
+                <div class="input-group">
+                    <span class="input-group-addon" id="server-registrar-username-label">Registrar Username</span>
+                    <input type="text" class="form-control" id="server-registrar-username" aria-describedby="server-registrar-username-label" data-ng-model="server_registrar_username" />
+                </div>
+                <br/>
+                
+                <!-- registrar login password -->
+                <div class="input-group">
+                    <span class="input-group-addon" id="server-registrar-password-label">Registrar Password</span>
+                    <input type="text" class="form-control" id="server-registrar-password" aria-describedby="server-registrar-password-label" data-ng-model="server_registrar_password" />
+                </div>
+                <br/>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-primary" data-ng-click="save_changes()">Save changes</button>
+        </div>
+    </div>
+</div>
+</div>

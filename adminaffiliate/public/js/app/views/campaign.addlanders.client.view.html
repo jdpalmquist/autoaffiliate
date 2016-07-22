@@ -1,0 +1,56 @@
+<!-- Top Navigation Include -->
+<div data-ng-include="'js/app/views/header.client.view.html'"></div>
+
+<!-- Add Landers to Campaign -->
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="text-left">
+                <a href="{{back_to_campaign_url}}">
+                    <button class="btn btn-success">
+                        <i class="fa fa-caret-left"></i> Back to Campaign
+                    </button>
+                </a>
+                <br/>
+                <br/>
+            </div>
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <div class="panel-title">
+                        All Available Landers
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Name
+                                </th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr data-ng-repeat="a in all_landers">
+                                <td>
+                                    <b>{{a.name}}</b>
+                                </td>
+                                <td>
+                                    <button class="btn btn-primary" data-lander-id="{{a._id}}" data-ng-click="add_lander_to_pool($event)">
+                                        Add Lander to Campaign Lander Pool
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Message Indicator -->
+<div id="campaign-add-landers-msg-container" class="display-none">
+    <div id="campaign-add-landers-msg">
+    </div>
+</div> 

@@ -1,0 +1,603 @@
+<!-- Top Navigation Include -->
+<div data-ng-include="'js/app/views/header.client.view.html'"></div>
+
+<div class="container">
+    <div class="row">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <div class="panel-title">
+                    Edit Campaign
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        Campaign: <b><i>{{name}}</i></b>
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <!--
+                        <b class="lowercase font-size-20px">{{createdAt}}</b>
+                        -->
+                    </div>
+                    <div class="col-md-4 text-right">
+                        <button class="btn btn-sm btn-danger" data-ng-click="delete_campaign()">
+                            <i class="fa fa-trash"></i> Delete Campaign
+                        </button>
+                        &nbsp;
+                        &nbsp;
+                        <button class="btn btn-sm btn-success" ng-show="!active" data-ng-click="start_campaign()">
+                            <i class="fa fa-play"></i> Start Campaign
+                        </button>
+                        <button class="btn btn-sm btn-primary" ng-show="active" data-ng-click="pause_campaign()">
+                            <i class="fa fa-pause"></i> Pause Campaign
+                        </button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li role="presentation"  class="active">
+                                <a id="info_tab" href="#info" aria-controls="info" role="tab" data-toggle="tab">
+                                    Info
+                                </a>
+                            </li>
+                            <li role="presentation">
+                                <a id="offer_tab" href="#offer" aria-controls="offer" role="tab" data-toggle="tab">
+                                    Offer
+                                </a>
+                            </li>
+                            <li role="presentation">
+                                <a id="lander_tab" href="#landers" aria-controls="landers" role="tab" data-toggle="tab">
+                                    Landers
+                                </a>
+                            </li>
+                            <li role="presentation">
+                                <a id="trafficsrc_tab" href="#trafficsrc" aria-controls="trafficsrc" role="tab" data-toggle="tab">
+                                    Traffic Source
+                                </a>
+                            </li>
+                        </ul>
+
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane active" id="info">
+                                <br/>
+                                <!-- campaign meta data -->
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <br/>
+                                        <!-- ACTIVE AND URL-SLUG -->
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon" id="c-status-active">
+                                                        Active
+                                                    </span>
+                                                    <input type="text" class="form-control" id="basic-url" aria-describedby="c-status-active" value="Yes" ng-show="active" />
+                                                    <input type="text" class="form-control" id="basic-url" aria-describedby="c-status-active" value="No" ng-show="!active" />
+                                                </div>
+                                                <br/>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon" id="c-status-slug">
+                                                        Url Slug
+                                                    </span>
+                                                    <input type="text" class="form-control" data-ng-model="slug" aria-describedby="c-status-slug" val="{{slug}}" />
+                                                </div>
+                                                <br/>
+                                            </div>
+                                        </div>
+
+                                        <!-- GROUP AND TYPE -->
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon" id="c-status-group">
+                                                        Group
+                                                    </span>
+                                                    <input type="text" class="form-control"aria-describedby="c-status-group" data-ng-model="group" />
+                                                </div>
+                                                <br/>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon" id="c-status-type">
+                                                        Type
+                                                    </span>
+                                                    <input type="text" class="form-control" aria-describedby="c-status-type" data-ng-model="type" />
+                                                </div>
+                                                <br/>
+                                            </div>                                
+                                        </div>
+
+                                        <!-- ISMOBILE AND ISDESKTOP -->
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon" id="c-status-ismobile">
+                                                        Is Mobile
+                                                    </span>
+                                                    <input type="text" class="form-control" id="basic-url" aria-describedby="c-status-ismobile" value="Yes" ng-show="is_mobile" />
+                                                    <input type="text" class="form-control" id="basic-url" aria-describedby="c-status-ismobile" value="No" ng-show="!is_mobile" />
+                                                </div>
+                                                <br/>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon" id="c-status-isdesktop">
+                                                        Is Desktop
+                                                    </span>
+                                                    <input type="text" class="form-control" id="basic-url" aria-describedby="c-status-isdesktop" value="Yes" ng-show="is_desktop" />
+                                                    <input type="text" class="form-control" id="basic-url" aria-describedby="c-status-isdesktop" value="No" ng-show="!is_desktop" />
+                                                </div>
+                                                <br/>
+                                            </div>                                
+                                        </div>
+
+                                        <!-- PHASE AND PHASE INTERVAL -->
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon" id="c-status-phase">
+                                                        Phase
+                                                    </span>
+                                                    <input type="text" class="form-control" aria-describedby="c-status-phase" data-ng-model="phase" />
+                                                </div>
+                                                <br/>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon" id="c-status-phase-interval">
+                                                        Phase Interval
+                                                    </span>
+                                                    <input type="text" class="form-control" aria-describedby="c-status-phase-interval" data-ng-model="phase_interval" />
+                                                </div>
+                                                <br/>
+                                            </div>                                
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-12 text-right">
+                                                <button class="btn btn-success" data-ng-click="update_campaign_meta_data()">
+                                                    Save Changes
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="offer">
+                                <br/>
+                                <!-- Offers -->
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <br/>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <h4>Current Offer: {{offer_name}}</h4>
+                                                <br/>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="input-group">
+                                                    <span class="input-group-btn">
+                                                        <button class="btn btn-success" type="button" data-ng-click="set_as_current_offer()">
+                                                            <i class="fa fa-caret-left"></i>
+                                                            &nbsp;
+                                                            &nbsp;
+                                                            Set as Current Offer
+                                                        </button>
+                                                    </span>
+                                                    <select id="offer_select" class="form-control">
+                                                        
+                                                    </select>
+                                                </div><!-- /input-group -->
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <!-- Current Offer -->
+                                            <div class="col-md-6">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon" id="offer-name-label">
+                                                        Offer Name
+                                                    </span>
+                                                    <input type="text" class="form-control" aria-describedby="offer-name-label" value="{{offer_name}}" disabled />
+                                                </div>
+                                                <br/>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon" id="offer-type-label">
+                                                        Offer Type
+                                                    </span>
+                                                    <input type="text" class="form-control" aria-describedby="offer-type-label" value="{{offer_type}}" disabled />
+                                                </div>
+                                                <br/>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon" id="offer-group-label">
+                                                        Offer Group
+                                                    </span>
+                                                    <input type="text" class="form-control" aria-describedby="offer-group-label" value="{{offer_group}}" disabled />
+                                                </div>
+                                                <br/>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon" id="offer-redirect-url-label">
+                                                        Offer Redirect URL
+                                                    </span>
+                                                    <input type="text" class="form-control" aria-describedby="offer-redirect-url-label" value="{{offer_redirect_url}}" disabled />
+                                                </div>
+                                                <br/>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon" id="offer-epa-label">
+                                                        Offer Epa
+                                                    </span>
+                                                    <input type="text" class="form-control" aria-describedby="offer-epa-label" value="{{offer_epa}}" disabled />
+                                                </div>
+                                                <br/>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon" id="offer-ismobile-label">
+                                                        Offer Is Mobile
+                                                    </span>
+                                                    <input type="text" class="form-control" aria-describedby="offer-ismobile-label" value="{{offer_ismobile}}" disabled />
+                                                </div>
+                                                <br/>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon" id="offer-isdesktop-label">
+                                                        Offer Is Desktop
+                                                    </span>
+                                                    <input type="text" class="form-control" aria-describedby="offer-isdesktop-label" value="{{offer_isdesktop}}" disabled />
+                                                </div>
+                                                <br/>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon" id="offer-conversions-label">
+                                                        Offer Conversions
+                                                    </span>
+                                                    <input type="text" class="form-control" aria-describedby="offer-conversions-label" value="{{offer_conversions}}" disabled />
+                                                </div>
+                                                <br/>
+                                            </div><!-- end current offer -->
+                                            
+                                            <!-- Available Offers -->
+                                            <div class="col-md-6">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon" id="av-offer-name-label">
+                                                        Offer Name
+                                                    </span>
+                                                    <input type="text" class="form-control" aria-describedby="av-offer-name-label" value="{{av_offer_name}}" disabled />
+                                                </div>
+                                                <br/>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon" id="av-offer-type-label">
+                                                        Offer Type
+                                                    </span>
+                                                    <input type="text" class="form-control" aria-describedby="av-offer-type-label" value="{{av_offer_type}}" disabled />
+                                                </div>
+                                                <br/>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon" id="av-offer-group-label">
+                                                        Offer Group
+                                                    </span>
+                                                    <input type="text" class="form-control" aria-describedby="av-offer-group-label" value="{{av_offer_group}}" disabled />
+                                                </div>
+                                                <br/>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon" id="av-offer-redirect-url-label">
+                                                        Offer Redirect URL
+                                                    </span>
+                                                    <input type="text" class="form-control" aria-describedby="av-offer-redirect-url-label" value="{{av_offer_redirect_url}}" disabled />
+                                                </div>
+                                                <br/>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon" id="av-offer-epa-label">
+                                                        Offer Epa
+                                                    </span>
+                                                    <input type="text" class="form-control" aria-describedby="av-offer-epa-label" value="{{av_offer_epa}}" disabled />
+                                                </div>
+                                                <br/>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon" id="av-offer-ismobile-label">
+                                                        Offer Is Mobile
+                                                    </span>
+                                                    <input type="text" class="form-control" aria-describedby="av-offer-ismobile-label" value="{{av_offer_ismobile}}" disabled />
+                                                </div>
+                                                <br/>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon" id="av-offer-isdesktop-label">
+                                                        Offer Is Desktop
+                                                    </span>
+                                                    <input type="text" class="form-control" aria-describedby="av-offer-isdesktop-label" value="{{av_offer_isdesktop}}" disabled />
+                                                </div>
+                                                <br/>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon" id="av-offer-conversions-label">
+                                                        Offer Conversions
+                                                    </span>
+                                                    <input type="text" class="form-control" aria-describedby="av-offer-conversions-label" value="{{av_offer_conversions}}" disabled />
+                                                </div>
+                                                <br/>
+                                            </div><!-- end available offers -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="landers">
+                                <br/>
+                                <!-- Landers -->
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="row">
+                                            <div class="col-md-12  text-right">
+                                                <a href="{{add_landers_link}}">
+                                                    <button class="btn btn-success">
+                                                        Add Landers to Campaign
+                                                    </button>
+                                                </a>
+                                                <br/>
+                                                <br/>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <table class="table table-striped">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>
+                                                                <b>Name</b>
+                                                            </th>
+                                                            <th>
+                                                                <b>Type</b>
+                                                            </th>
+                                                            <th>
+                                                                <b>Group</b>
+                                                            </th>
+                                                            <th>
+                                                                <b>Page URL</b>
+                                                            </th>
+                                                            <th>
+                                                                <b>Is Mobile?</b>
+                                                            </th>
+                                                            <th>
+                                                                <b>Is Desktop</b>
+                                                            </th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr data-ng-repeat="l in active_landers">       
+                                                            <td>
+                                                                {{l.name}}
+                                                            </td>
+                                                            <td>
+                                                                {{l.type}}
+                                                            </td>
+                                                            <td>
+                                                                {{l.group}}
+                                                            </td>
+                                                            <td>
+                                                                {{l.url}}
+                                                            </td>
+                                                            <td>
+                                                                {{l.is_mobile}}
+                                                            </td>
+                                                            <td>
+                                                                {{l.is_desktop}}
+                                                            </td>
+                                                            <td>
+                                                                <div class="text-center">
+                                                                    <a href="#/{{host}}/landers/view/{{l._id}}">
+                                                                        <button class="btn btn-primary" title="View Lander">
+                                                                            <i class="fa fa-eye"></i>
+                                                                        </button>
+                                                                    </a>
+                                                                    &nbsp;
+                                                                    &nbsp;
+                                                                    <button class="btn btn-danger" title="Remove Lander" data-lander-id="{{l._id}}" data-ng-click="remove_lander($event)">
+                                                                        <i class="fa fa-trash" data-lander-id="{{l._id}}"></i>
+                                                                    </button>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                    <!-- 
+                                                    <tfoot>
+
+                                                    </tfoot>
+                                                    -->
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="trafficsrc">
+                                <br/>
+                                <!-- Traffic Source -->
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <br/>
+                                        <!-- Traffic Source Header row -->
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <h4>Current Traffic Source: {{trafficsrc_name}}</h4>
+                                                <br/>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="input-group">
+                                                    <span class="input-group-btn">
+                                                        <button class="btn btn-success" type="button" data-ng-click="set_as_current_trafficsrc()">
+                                                            <i class="fa fa-caret-left"></i>
+                                                            &nbsp;
+                                                            &nbsp;
+                                                            Set as Current Traffic Source
+                                                        </button>
+                                                    </span>
+                                                    <select id="trafficsrc_select" class="form-control">
+                                                        
+                                                    </select>
+                                                </div><!-- /input-group -->
+                                            </div>
+                                        </div>
+                                        <!-- Traffic Source Data row -->
+                                        <div class="row">
+                                            <!-- Current Traffic Source -->
+                                            <div class="col-md-6">
+                                                <!-- Traffic Source Name -->
+                                                <div class="input-group">
+                                                    <span class="input-group-addon" id="trafficsrc-name-label">
+                                                        Trafficsrc Name
+                                                    </span>
+                                                    <input type="text" class="form-control" aria-describedby="trafficsrc-name-label" value="{{trafficsrc_name}}" disabled />
+                                                </div>
+                                                <br/>
+                                                <!-- Traffic Source Active -->
+                                                <div class="input-group">
+                                                    <span class="input-group-addon" id="trafficsrc-active-label">
+                                                        Trafficsrc Active
+                                                    </span>
+                                                    <input type="text" class="form-control" aria-describedby="trafficsrc-active-label" value="{{trafficsrc_active}}" disabled />
+                                                </div>
+                                                <br/>
+                                                <!-- Traffic Source Type -->
+                                                <div class="input-group">
+                                                    <span class="input-group-addon" id="trafficsrc-type-label">
+                                                        Trafficsrc Type
+                                                    </span>
+                                                    <input type="text" class="form-control" aria-describedby="trafficsrc-type-label" value="{{trafficsrc_type}}" disabled />
+                                                </div>
+                                                <br/>
+                                                <!-- Traffic Source Group -->
+                                                <div class="input-group">
+                                                    <span class="input-group-addon" id="trafficsrc-group-label">
+                                                        Trafficsrc Group
+                                                    </span>
+                                                    <input type="text" class="form-control" aria-describedby="trafficsrc-group-label" value="{{trafficsrc_group}}" disabled />
+                                                </div>
+                                                <br/>
+                                                <!-- Traffic Source Name -->
+                                                <div class="input-group">
+                                                    <span class="input-group-addon" id="trafficsrc-iscpc-label">
+                                                        Trafficsrc is CPC
+                                                    </span>
+                                                    <input type="text" class="form-control" aria-describedby="trafficsrc-iscpc-label" value="{{trafficsrc_is_cpc}}" disabled />
+                                                </div>
+                                                <br/>
+                                                <!-- Traffic Source Name -->
+                                                <div class="input-group">
+                                                    <span class="input-group-addon" id="trafficsrc-iscpm-label">
+                                                        Trafficsrc CPM
+                                                    </span>
+                                                    <input type="text" class="form-control" aria-describedby="trafficsrc-iscpm-label" value="{{trafficsrc_is_cpm}}" disabled />
+                                                </div>
+                                                <br/>
+                                                <!-- Traffic Source Type -->
+                                                <div class="input-group">
+                                                    <span class="input-group-addon" id="trafficsrc-cpa-label">
+                                                        Trafficsrc CPA
+                                                    </span>
+                                                    <input type="text" class="form-control" aria-describedby="trafficsrc-cpa-label" value="{{trafficsrc_cpa}}" disabled />
+                                                </div>
+                                                <br/>
+                                                <!-- Traffic Source Type -->
+                                                <div class="input-group">
+                                                    <span class="input-group-addon" id="trafficsrc-adtype-label">
+                                                        Trafficsrc Ad Type
+                                                    </span>
+                                                    <input type="text" class="form-control" aria-describedby="trafficsrc-adtype-label" value="{{trafficsrc_adtype}}" disabled />
+                                                </div>
+                                                <br/>
+                                                <!-- Traffic Source Type -->
+                                                <div class="input-group">
+                                                    <span class="input-group-addon" id="trafficsrc-adimg-label">
+                                                        Trafficsrc Ad Img
+                                                    </span>
+                                                    <input type="text" class="form-control" aria-describedby="trafficsrc-adimg-label" value="{{trafficsrc_adimg}}" disabled />
+                                                </div>
+                                                <br/>
+                                            </div><!-- end current traffic source -->
+
+                                            <!-- Available Traffic Source  -->
+                                            <div class="col-md-6">
+                                                <!-- Traffic Source Name -->
+                                                <div class="input-group">
+                                                    <span class="input-group-addon" id="trafficsrc-avname-label">
+                                                        AV Trafficsrc Name
+                                                    </span>
+                                                    <input type="text" class="form-control" aria-describedby="trafficsrc-avname-label" value="{{trafficsrc_av_name}}" disabled />
+                                                </div>
+                                                <br/>
+                                                <!-- Traffic Source Active -->
+                                                <div class="input-group">
+                                                    <span class="input-group-addon" id="trafficsrc-avactive-label">
+                                                        AV Trafficsrc Active
+                                                    </span>
+                                                    <input type="text" class="form-control" aria-describedby="trafficsrc-avactive-label" value="{{trafficsrc_av_active}}" disabled />
+                                                </div>
+                                                <br/>
+                                                <!-- Traffic Source Type -->
+                                                <div class="input-group">
+                                                    <span class="input-group-addon" id="trafficsrc-avtype-label">
+                                                        AV Trafficsrc Type
+                                                    </span>
+                                                    <input type="text" class="form-control" aria-describedby="trafficsrc-avtype-label" value="{{trafficsrc_av_type}}" disabled />
+                                                </div>
+                                                <br/>
+                                                <!-- Traffic Source Group -->
+                                                <div class="input-group">
+                                                    <span class="input-group-addon" id="trafficsrc-avgroup-label">
+                                                        AV Trafficsrc Group
+                                                    </span>
+                                                    <input type="text" class="form-control" aria-describedby="trafficsrc-avgroup-label" value="{{trafficsrc_av_group}}" disabled />
+                                                </div>
+                                                <br/>
+                                                <!-- Traffic Source Name -->
+                                                <div class="input-group">
+                                                    <span class="input-group-addon" id="trafficsrc-av_iscpc-label">
+                                                        AV Trafficsrc is CPC
+                                                    </span>
+                                                    <input type="text" class="form-control" aria-describedby="trafficsrc-aviscpc-label" value="{{trafficsrc_av_is_cpc}}" disabled />
+                                                </div>
+                                                <br/>
+                                                <!-- Traffic Source Name -->
+                                                <div class="input-group">
+                                                    <span class="input-group-addon" id="trafficsrc-aviscpm-label">
+                                                        AV Trafficsrc CPM
+                                                    </span>
+                                                    <input type="text" class="form-control" aria-describedby="trafficsrc-aviscpm-label" value="{{trafficsrc_av_is_cpm}}" disabled />
+                                                </div>
+                                                <br/>
+                                                <!-- Traffic Source Type -->
+                                                <div class="input-group">
+                                                    <span class="input-group-addon" id="trafficsrc-avcpa-label">
+                                                        AV Trafficsrc CPA
+                                                    </span>
+                                                    <input type="text" class="form-control" aria-describedby="trafficsrc-avcpa-label" value="{{trafficsrc_av_cpa}}" disabled />
+                                                </div>
+                                                <br/>
+                                                <!-- Traffic Source Type -->
+                                                <div class="input-group">
+                                                    <span class="input-group-addon" id="trafficsrc-avadtype-label">
+                                                        AV Trafficsrc Ad Type
+                                                    </span>
+                                                    <input type="text" class="form-control" aria-describedby="trafficsrc-avadtype-label" value="{{trafficsrc_av_adtype}}" disabled />
+                                                </div>
+                                                <br/>
+                                                <!-- Traffic Source Type -->
+                                                <div class="input-group">
+                                                    <span class="input-group-addon" id="trafficsrc-avadimg-label">
+                                                        AV Trafficsrc Ad Img
+                                                    </span>
+                                                    <input type="text" class="form-control" aria-describedby="trafficsrc-avadimg-label" value="{{trafficsrc_av_adimg}}" disabled />
+                                                </div>
+                                                <br/>
+                                            </div><!-- end available traffic source -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br/>
+        <br/>
+    </div>
+</div>

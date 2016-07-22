@@ -1,0 +1,237 @@
+<!-- Top Navigation Include -->
+<div data-ng-include="'js/app/views/header.client.view.html'"></div>
+
+<div class="container">
+    <div class="row">        
+        <div class="col-md-12">
+            <!-- Pages -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Landers</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div>
+                                <!-- Nav tabs -->
+                                <ul class="nav nav-tabs" role="tablist">
+                                    <li role="presentation" class="active">
+                                        <a id="active_landers_tab" href="#active_landers" aria-controls="active_landers" role="tab" data-toggle="tab">
+                                            Active Landers
+                                        </a>
+                                    </li>
+                                    <li role="presentation">
+                                        <a id="paused_landers_tab" href="#paused_landers" aria-controls="profile" role="tab" data-toggle="tab">
+                                            Paused Landers
+                                        </a>
+                                    </li>
+                                    <li role="presentation">
+                                        <a id="create_lander_tab" href="#create_lander" aria-controls="create_lander" role="tab" data-toggle="tab">
+                                            Create Lander
+                                        </a>
+                                    </li>
+                                </ul>
+
+                                <!-- Tab panes -->
+                                <div class="tab-content">
+                                    <div role="tabpanel" class="tab-pane active" id="active_landers">
+                                        <br/>
+                                        <!-- Active Landers -->
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <!-- Data Table -->
+                                                <table class="table table-striped">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Name</th>
+                                                            <th>File Path</th>
+                                                            <th></th>
+                                                            <th></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr data-ng-repeat="a in active_landers">
+                                                            <td>
+                                                                <b>{{a.lander_name}}</b>
+                                                            </td>
+                                                            <td>
+                                                                {{a.lander_filepath}}
+                                                            </td>
+                                                            <td>
+                                                                <a href="#/{{host}}/landers/view/{{a.lander_id}}">
+                                                                    <button class="btn btn-primary">
+                                                                        View
+                                                                    </button>
+                                                                </a>
+                                                            </td>
+                                                            <td>
+                                                                <button class="btn btn-danger" data-lander-id="{{a.lander_id}}" data-ng-click="delete_lander($event)">
+                                                                    <i class="fa fa-trash" data-lander-id="{{a.lander_id}}"></i>
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div role="tabpanel" class="tab-pane" id="paused_landers">
+                                        <br/>
+                                    </div>
+                                    <div role="tabpanel" class="tab-pane" id="create_lander">
+                                        <br/>
+                                        <div class="row">
+                                            <div class="col-md-7">
+                                                <b>Pages available on this Server:</b>
+                                                <div class="text-center">
+                                                    <ul class="pagination">
+                                                        <li>
+                                                            <a class="clickable" aria-label="Previous" data-ng-click="prev_page()">
+                                                                <span aria-hidden="true">&laquo;</span>
+                                                            </a>
+                                                        </li>
+                                                        <li data-ng-repeat="p in pages" ng-class="{'active': $index == page_index}">
+                                                            <a class="clickable" data-ng-click="goto_page($index)">
+                                                                {{$index+1}}
+                                                            </a> 
+                                                        </li>
+                                                        <li>
+                                                            <a class="clickable" aria-label="Next" data-ng-click="next_page()">
+                                                                <span aria-hidden="true">&raquo;</span>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-5">
+                                                <div class="text-center">
+                                                    <b>Current Filepath</b>: <i>{{fullpath}}</i>
+                                                    <br/>
+                                                    <br/>
+                                                </div>
+                                                <div class="text-center" style="margin-bottom:20px;">
+                                                    <button  data-ng-click="load_create_lander_modal()" class="btn btn-success" data-toggle="modal" data-target="#createLanderModal">
+                                                        Use this Page to Create Lander
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <iframe id="page-iframe" class="width100" style="height:500px;" src=""></iframe>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br/>
+                    <br/>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="createLanderModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="createLanderModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header ">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="createLanderModalLabel">
+                    Creating lander on host: <b><i>{{host}}</i></b>
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="input-group">
+                            <span class="input-group-addon" id="lander-filepath-label">
+                                Filepath
+                            </span>
+                            <input data-ng-model="lander_filepath" type="text" class="form-control" value="{{fullpath}}" aria-describedby="lander-filepath-label" disabled>
+                        </div>
+                        <br/>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="input-group">
+                            <span class="input-group-addon" id="lander-url-label">
+                                URL
+                            </span>
+                            <input data-ng-model="lander_url" type="text" class="form-control" value="{{fullpath}}" aria-describedby="lander-url-label" disabled>
+                        </div>
+                        <br/>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="input-group">
+                            <span class="input-group-addon" id="lander-name-label">
+                                Name [required]
+                            </span>
+                            <input data-ng-model="lander_name" type="text" class="form-control" placeholder="Lander Name" aria-describedby="lander-name-label">
+                        </div>
+                        <br/>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="input-group">
+                            <span class="input-group-addon" id="lander-type-label">
+                                Type [optional]
+                            </span>
+                            <input data-ng-model="lander_type" type="text" class="form-control" placeholder="Type" aria-describedby="lander-type-label">
+                        </div>
+                        <br/>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="input-group">
+                            <span class="input-group-addon" id="lander-group-label">
+                                Group [optional]
+                            </span>
+                            <input data-ng-model="lander_group" type="text" class="form-control" placeholder="Group" aria-describedby="lander-group-label">
+                        </div>
+                        <br/>
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <span id="lander-ismobile-label">
+                            Is Mobile
+                        </span>
+                        <input data-ng-click="ismobile_toggle()" type="checkbox" class="form-control createlander-chkbox">
+                        <br/>
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <span id="lander-istablet-label">
+                            Is Tablet
+                        </span>
+                        <input data-ng-click="istablet_toggle()" type="checkbox" class="form-control createlander-chkbox">                        
+                        <br/>
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <span id="lander-isdesktop-label">
+                            Is Desktop
+                        </span>
+                        <input data-ng-click="isdesktop_toggle()" type="checkbox" class="form-control createlander-chkbox">
+                        <br/>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="input-group">
+                            <span class="input-group-addon" id="lander-tags-label">
+                                Tags [optional]
+                            </span>
+                            <input data-ng-model="lander_tags" type="text" class="form-control" aria-describedby="lander-tags-label">
+                        </div>
+                        <br/>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">
+                    Close
+                </button>
+                <button type="button" class="btn btn-primary" data-ng-click="create_lander()">
+                    Create    
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

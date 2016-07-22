@@ -1,0 +1,187 @@
+<!-- Top Navigation Include -->
+<div data-ng-include="'js/app/views/header.client.view.html'"></div>
+
+<div class="container">
+    <!-- 3-col layout up top -->
+    <div class="row">
+        <div class="col-md-4">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Active Campaigns</h3>
+                </div>
+                <div class="panel-body text-center">
+                    <div class="stats_num_large">{{num_active_campaigns}}</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Paused Campaigns</h3>
+                </div>
+                <div class="panel-body text-center">
+                    <div class="stats_num_large">{{num_paused_campaigns}}</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Extra</h3>
+                </div>
+                <div class="panel-body">
+                    <!-- Something Extra -->
+                </div>
+            </div>
+        </div>
+    </div><!-- end top 3-col layout up top -->
+    <!-- panel + tabs -->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <div class="panel-title">
+                        Campaigns
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <br/>
+                    <div>
+                        <!-- Nav tabs -->
+                        <ul id="campaign_tabs" class="nav nav-tabs" role="tablist">
+                            <li role="presentation" class="active">
+                                <a id="active_campaigns_tab" class="clickable" href="#active_campaigns" aria-controls="active_campaigns" role="tab" data-toggle="tab">
+                                    Active Campaigns
+                                </a>
+                            </li>
+                            <li role="presentation">
+                                <a id="paused_campaigns_tab" class="clickable" href="#paused_campaigns" aria-controls="paused_campaigns" role="tab" data-toggle="tab">
+                                    Paused Campaigns
+                                </a>
+                            </li>
+                            <li role="presentation">
+                                <a id="create_campaign_tab" class="clickable" role="tab" data-toggle="modal" data-target="#createCampaignModal">
+                                    Create Campaign
+                                </a>
+                            </li>
+                        </ul>
+
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane active" id="active_campaigns">
+                                <br/>
+                                <!-- Data Table -->
+                                <table id="active_campaigns_datatable" class="display" cellspacing="0" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="paused_campaigns">
+                                <br/>
+                                <!-- Data Table -->
+                                <table id="paused_campaigns_datatable" class="display" cellspacing="0" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div> 
+                            <div role="tabpanel" class="tab-pane" id="create_campaign">
+                                
+                            </div>                           
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br/>
+            <br/>
+        </div>
+    </div><!-- end panel + tabs -->
+</div>
+
+<!-- Create Campaign Modal -->
+<div id="createCampaignModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="createCampaignModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header ">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="createCampaignModalLabel">
+                    Creating campaign on host: <b><i>{{host}}</i></b>
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        
+                    </div>
+                    <div class="col-md-12">
+                        <div class="input-group">
+                            <span class="input-group-addon" id="campaign-name">
+                                Campaign Name
+                            </span>
+                            <input data-ng-model="name" type="text" class="form-control" placeholder="[required]" aria-describedby="campaign-name">
+                        </div>
+                        <br/>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="input-group">
+                            <span class="input-group-addon" id="campaign-slug">
+                                Url Slug
+                            </span>
+                            <input data-ng-model="slug" type="text" class="form-control" placeholder="[required] a-z 0-9 _ - /" aria-describedby="campaign-slug">
+                        </div>
+                        <br/>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="input-group">
+                            <span class="input-group-addon" id="campaign-group">
+                                Group
+                            </span>
+                            <input data-ng-model="group" type="text" class="form-control" placeholder="[optional]" aria-describedby="campaign-group">
+                        </div>
+                        <br/>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="input-group">
+                            <span class="input-group-addon" id="campaign-type">
+                                Type
+                            </span>
+                            <input data-ng-model="type" type="text" class="form-control" placeholder="[optional]" aria-describedby="campaign-type">
+                        </div>
+                        <br/>
+                    </div>
+                    <br/>
+                    <div class="col-md-6 text-center">
+                        <span id="offer-ismobile-label">
+                            Is Mobile
+                        </span>
+                        <input data-ng-click="ismobile_toggle()" type="checkbox" class="form-control createoffer-chkbox">
+                        <br/>
+                    </div>
+                    <div class="col-md-6 text-center">
+                        <span id="offer-isdesktop-label">
+                            Is Desktop
+                        </span>
+                        <input data-ng-click="isdesktop_toggle()" type="checkbox" class="form-control createoffer-chkbox">
+                        <br/>
+                    </div>
+                    <br/>                   
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-default" data-dismiss="modal">
+                    Close
+                </button>
+                <button class="btn btn-primary" data-ng-click="create_campaign()">
+                    Create    
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

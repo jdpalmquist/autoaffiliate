@@ -1,0 +1,71 @@
+<!-- Top Navigation Include -->
+<div data-ng-include="'js/app/views/header.client.view.html'"></div>
+
+<div class="container">
+    <div class="row">        
+        <div class="col-md-6 col-md-offset-3">
+            <!-- start Edit Offer -->
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Edit Offer</h3>
+                </div>
+                <div class="panel-body">
+                        
+                    <div class="input-group">
+                        <span class="input-group-addon" id="offer-name-label">Name</span>
+                        <input type="text" class="form-control" data-ng-model="offer_name" aria-describedby="offer-name-label">
+                    </div>
+                    <br/>
+                    <div class="input-group">
+                        <span class="input-group-addon" id="offer-redirect-url-label">Redirect URL</span>
+                        <input type="text" class="form-control" data-ng-model="offer_redirect_url" aria-describedby="offer-redirect-url-label">
+                    </div>
+                    <br/>
+                    <div class="input-group">
+                        <span class="input-group-addon" id="offer-type-label">Type</span>
+                        <input type="text" class="form-control" data-ng-model="offer_type" aria-describedby="offer-type-label">
+                    </div>
+                    <br/>
+                    <div class="input-group">
+                        <span class="input-group-addon" id="offer-group-label">Group</span>
+                        <input type="text" class="form-control" data-ng-model="offer_group" aria-describedby="offer-group-label">
+                    </div>
+                    <br/>
+                    <div class="col-md-6 text-center">
+                        <span id="offer-ismobile-label">
+                            Is Mobile
+                        </span>
+                        <input data-ng-click="ismobile_toggle()" type="checkbox" class="form-control createoffer-chkbox">
+                        <br/>
+                    </div>
+                    <div class="col-md-6 text-center">
+                        <span id="offer-isdesktop-label">
+                            Is Desktop
+                        </span>
+                        <input data-ng-click="isdesktop_toggle()" type="checkbox" class="form-control createoffer-chkbox">
+                        <br/>
+                    </div>
+                    <br/>
+                    <div class="input-group">
+                        <span class="input-group-addon" id="offer-epa-label">Earnings Per Action $</span>
+                        <input type="text" class="form-control" data-ng-model="offer_epa" aria-describedby="offer-epa-label">
+                    </div>
+                    <br/>
+                    <div class="input-group">
+                        <span class="input-group-addon" id="offer-conversions-label">Conversions</span>
+                        <input type="text" class="form-control" data-ng-model="offer_conversions" aria-describedby="offer-conversions-label">
+                    </div>
+                    <br/>
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <hr/>
+                            <button data-ng-click="update_offer()" class="btn btn-success">
+                                Update Offer
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- end edit offer -->
+        </div>
+    </div>
+</div>

@@ -1,0 +1,90 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid" ng-controller="NavController">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#/">Admin Affiliate</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul id="menu_bar_ul" class="nav navbar-nav">
+                <!-- domains menu button -->
+                <li class="dropdown" ng-show="!host">
+                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Servers <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="#/addserver">
+                                <i class="fa fa-plus"></i> Add Server
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#/">
+                                <i class="fa fa-gear"></i> Manage Servers
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- campaigns menu button -->
+                <li class="dropdown" ng-show="host">
+                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dashboard <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="#/{{host}}/dashboard">
+                                <i class="fa fa-dashboard"></i> Dashboard
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#/{{host}}/campaigns">
+                               <i class="fa fa-line-chart"></i> Campaigns
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#/{{host}}/offers">
+                                <i class="fa fa-usd"></i> Offers
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#/{{host}}/landers">
+                                <i class="fa fa-qrcode"></i> Landers
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#/{{host}}/trafficsources">
+                                <i class="fa fa-exchange"></i> Traffic Sources
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- system menu button -->
+                <li class="dropdown" ng-show="host">
+                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        System <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <!--
+                        <li><a href="#">Another action</a></li>
+                        <li><a href="#">Something else here</a></li>
+                        <li role="separator" class="divider"></li>
+                        -->
+                        <li><a href="#/shutdown/admin">Shutdown Admin Server</a></li>
+                    </ul>
+                </li>
+                
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <!-- current domain -->
+                <li ng-show="host">
+                    <a id="current_selected_domain">
+                        {{host}} ( <i>{{remote_host_ip}}</i> )
+                    </a>
+                </li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>

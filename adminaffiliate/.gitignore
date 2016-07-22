@@ -1,0 +1,8 @@
+connections/
+node_modules/
+public/js/vendor/
+
+*.txt
+*.log
+*.out
+*.err

@@ -1,0 +1,203 @@
+<!-- Top Navigation Include -->
+<div data-ng-include="'js/app/views/header.client.view.html'"></div>
+
+<div class="container">
+    <div class="row">        
+        <div class="col-md-12">
+            <!-- Active Offers -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Offers</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div>
+                                <!-- Nav tabs -->
+                                <ul class="nav nav-tabs" role="tablist">
+                                    <li role="presentation" class="active">
+                                        <a id="active_offer_tab" href="#active_offers" aria-controls="active_offers" role="tab" data-toggle="tab">
+                                            Active Offers
+                                        </a>
+                                    </li>
+                                    <li role="presentation">
+                                        <a id="paused_offer_tab" href="#paused_offers" aria-controls="paused_offers" role="tab" data-toggle="tab">
+                                            Paused Offers
+                                        </a>
+                                    </li>
+                                    <li role="presentation">
+                                        <a id="create_offer_tab" class="clickable" role="tab" data-toggle="modal" data-target="#createOfferModal">
+                                            Create Offer
+                                        </a>
+                                    </li>
+                                </ul>
+
+                                <!-- Tab panes -->
+                                <div class="tab-content">
+                                    <div role="tabpanel" class="tab-pane active" id="active_offers">
+                                        <br/>
+                                        <!-- Data Table -->
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>Name</th>
+                                                    <th>Type</th>
+                                                    <th>Group</th>
+                                                    <th>Redirect URL</th>
+                                                    <th>Is Mobile</th>
+                                                    <th>Is Desktop</th>
+                                                    <th>EPA</th>
+                                                    <th>Conversions</th>
+                                                    <th><!-- edit button --></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr data-ng-repeat="o in active_offers">
+                                                    <td><b>{{o.name}}</b></td>
+                                                    <td>{{o.type}}</td>
+                                                    <td>{{o.group}}</td>
+                                                    <td>{{o.redirect_url}}</td>
+                                                    <td>{{o.is_mobile}}</td>
+                                                    <td>{{o.is_desktop}}</td>
+                                                    <td>{{o.epa}}</td>
+                                                    <td>{{o.conversions}}</td>
+                                                    <td>
+                                                        <a href="#/{{host}}/offers/edit/{{o._id}}">
+                                                            <button class="btn btn-primary">
+                                                                <i class="fa fa-eye"></i>
+                                                            </button>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div role="tabpanel" class="tab-pane" id="paused_offers">
+                                        <br/>
+                                        <!-- Data Table -->
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>Name</th>
+                                                    <th>Type</th>
+                                                    <th>Group</th>
+                                                    <th>Redirect URL</th>
+                                                    <th>Is Mobile</th>
+                                                    <th>Is Desktop</th>
+                                                    <th>EPA</th>
+                                                    <th>Conversions</th>
+                                                    <th><!-- edit button --></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr data-ng-repeat="o in paused_offers">
+                                                    <td><b>{{o.name}}</b></td>
+                                                    <td>{{o.type}}</td>
+                                                    <td>{{o.group}}</td>
+                                                    <td>{{o.redirect_url}}</td>
+                                                    <td>{{o.is_mobile}}</td>
+                                                    <td>{{o.is_desktop}}</td>
+                                                    <td>{{o.epa}}</td>
+                                                    <td>{{o.conversions}}</td>
+                                                    <td>
+                                                        <a href="#/{{host}}/offers/edit/{{o._id}}">
+                                                            <button class="btn btn-primary">
+                                                                <i class="fa fa-eye"></i>
+                                                            </button>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br/>
+                    <br/>
+                </div>
+            </div><!-- end active offers -->
+        </div>
+    </div>
+</div>
+
+<!-- Add Offers Modal -->
+<div class="modal fade" id="createOfferModal" tabindex="-1" role="dialog" aria-labelledby="createOfferModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="createOfferModalLabel">Create Offer</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6 col-md-offset-3">
+                        <!-- 
+                            name:           {type: String,  required: true },
+                            active:         {type: Boolean, required: false, default: true},
+                            group:          {type: String,  required: false, default: ''},
+                            redirect_url:   {type: String,  required: true},
+                            callback_var:   {type: String,  required: true},
+                            type:           {type: String,  required: false, default: ''},
+                            is_mobile:      {type: Boolean, required: false, default: false},
+                            is_desktop:     {type: Boolean, required: false, default: false},
+                            epa:            {type: Number,  required: false, default: 0},
+                            conversions:    {type: Number,  required: false, default: 0},
+                        -->
+
+                        <div class="input-group">
+                            <span class="input-group-addon" id="offer-name-label">Name</span>
+                            <input type="text" class="form-control" data-ng-model="offer_name" aria-describedby="offer-name-label">
+                        </div>
+                        <br/>
+                        <div class="input-group">
+                            <span class="input-group-addon" id="offer-redirect-url-label">Redirect URL</span>
+                            <input type="text" class="form-control" data-ng-model="offer_redirect_url" aria-describedby="offer-redirect-url-label">
+                        </div>
+                        <br/>
+                        <div class="input-group">
+                            <span class="input-group-addon" id="offer-callback-var-label">Callback Var</span>
+                            <input type="text" class="form-control" data-ng-model="offer_callback_var" aria-describedby="offer-callback-var-label">
+                        </div>
+                        <br/>
+                        <div class="input-group">
+                            <span class="input-group-addon" id="offer-type-label">Type</span>
+                            <input type="text" class="form-control" data-ng-model="offer_type" aria-describedby="offer-type-label">
+                        </div>
+                        <br/>
+                        <div class="input-group">
+                            <span class="input-group-addon" id="offer-group-label">Group</span>
+                            <input type="text" class="form-control" data-ng-model="offer_group" aria-describedby="offer-group-label">
+                        </div>
+                        <br/>
+                        <div class="col-md-6 text-center">
+                            <span id="offer-ismobile-label">
+                                Is Mobile
+                            </span>
+                            <input data-ng-click="ismobile_toggle()" type="checkbox" class="form-control createoffer-chkbox">
+                            <br/>
+                        </div>
+                        <div class="col-md-6 text-center">
+                            <span id="offer-isdesktop-label">
+                                Is Desktop
+                            </span>
+                            <input data-ng-click="isdesktop_toggle()" type="checkbox" class="form-control createoffer-chkbox">
+                            <br/>
+                        </div>
+                        <br/>
+                        <div class="input-group">
+                            <span class="input-group-addon" id="offer-epa-label">Earnings Per Action $</span>
+                            <input type="text" class="form-control" data-ng-model="offer_epa" aria-describedby="offer-epa-label">
+                        </div>
+                        <br/>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-ng-click="create_offer()">Create Offer</button>
+            </div>
+        </div>
+    </div>
+</div>
